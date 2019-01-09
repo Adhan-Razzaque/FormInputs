@@ -12,45 +12,58 @@
   </head>
   <body>
     <div id="banner" class="container">
-      <h1 class="display-4">Hello, world!</h1>
+      <h1 class="display-4">Sorting Hat</h1>
     </div>
     <div class="container">
       <form action="{{ url_for('process_inputs') }}" method="post">
         <div class="form-group">
           <label for="input_name">First Name</label>
-          <input type="text" class="form-control" name="input_name"  id="input_name" placeholder="Fred Flintstone">
+          <input type="text" class="form-control" name="input_name"  id="input_name" placeholder="Harry">
         </div>
         <div class="form-group">
-          <label for="input_dropdown">Example select</label>
-          <select class="form-control" name="input_dropdown" id="input_dropdown">
-            <option>1 fish</option>
-            <option>2 fish</option>
-            <option>red fish</option>
-            <option>the spanish inquisition</option>
-            <option>blue fish</option>
+          <label for="input_animal">Pick an Animal</label>
+          <select class="form-control" name="input_animal" id="input_animal">
+            <option>Lion</option>
+            <option>Raven</option>
+            <option>Snake</option>
+            <option>Badger</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="input_select">Example multiple select</label>
-          <select multiple class="form-control" name="input_select" id="input_select">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <label for="input_personality">What personality trait best suits you?</label>
+          <select class="form-control" name="input_personality" id="input_personality">
+            <option>Loyalty</option>
+            <option>Bravery</option>
+            <option>Ambition</option>
+            <option>Wisdom</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="input_freeform">Example textarea</label>
+            <label for="input_extrainfo">Select some more traits that describe you.</label>
+            <select multiple class="form-control" name="input_extrainfo" id="input_extrainfo">
+                <option>Honest</option>
+                <option>Driven</option>
+                <option>Intelligent</option>
+                <option>Determined</option>
+                <option>Patient</option>
+                <option>Charming</option>
+                <option>Independent</option>
+                <option>Idealistic</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="input_freeform">If you would like to say anything to the Sorting Hat, this is your chance.</label>
           <textarea class="form-control" name="input_freeform" id="input_freeform" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
     <div class="container">
-      {% if input_data %} {{ input_data }} {% endif %}
+      {% if intro %} {{ intro }} {% endif %}
       <br />
-      {% if output %} {{ output }} {% endif %}
+      {% if body %} {{ body }} {% endif %}
+      <br />
+      {% if outro %} {{ outro }} {% endif %}
     </div>
   </body>
 </html>

@@ -11,32 +11,52 @@ def process_inputs():
     name = request.form.get('input_name', '')
     animal = request.form.get('input_animal', '')
     personality = request.form.get('input_personality', '')
-    extrainfo = request.form.get('input_extrainfo', '')
+    extrainfo = request.form.getlist('extrainfo')
     letter = request.form.get('input_freeform', '')
-    gryffindor = 0
-    slytherin = 0
-    hufflepuff = 0
-    ravenclaw = 0
+    house = {'Gryffindor': 0, 'Slytherin': 0, 'Hufflepuff': 0, 'Ravenclaw': 0}
     if animal is "Lion":
-        gryffindor += 1
-    elif animal="Raven":
-        ravenclaw += 1
-    elif animal="Snake":
-        slytherin += 1
-    elif animal="Badger":
-        hufflepuff += 1
-    if personality="Bravery":
-        gryffindor += 1
-    elif personality="Wisdom":
-        ravenclaw += 1
-    elif personality="Ambition":
-        slytherin += 1
-    elif personality="Loyalty":
-        hufflepuff += 1
+        house['Gryffindor'] += 1
+    elif animal is "Eagle":
+        house['Ravenclaw'] += 1
+    elif animal is "Snake":
+        house['Slytherin'] += 1
+    elif animal is "Badger":
+        house['Hufflepuff'] += 1
+
+    if personality is "Bravery":
+        house['Gryffindor'] += 1
+    elif personality is "Wisdom":
+        house['Ravenclaw'] += 1
+    elif personality is "Ambition":
+        house['Slytherin'] += 1
+    elif personality is "Loyalty":
+        house['Hufflepuff'] += 1
+
     if "Honest" in extrainfo:
-        gryffindor += 1
+        house['Gryffindor'] += 1
     elif "Idealistic" in extrainfo:
-        gryffindor += 1
+        house['Gryffindor'] += 1
+    elif "Driven" in extrainfo:
+        house['Slytherin'] += 1
+    elif "Intelligent" in extrainfo:
+        house['Ravenclaw'] += 1
+    elif "Determined" in extrainfo:
+        house['Hufflepuff'] += 1
+    elif "Patient" in extrainfo:
+        house['Hufflepuff'] += 1
+    elif "Charming" in extrainfo:
+        house['Slytherin'] += 1
+    elif "Inquisitive" in extrainfo:
+        house['Ravenclaw'] += 1
+    elif "Courageous" in extrainfo:
+        house['Gryffindor'] += 1
+    elif "Creative" in extrainfo:
+        house['Ravenclaw'] += 1
+    elif "Fair" in extrainfo:
+        house['Hufflepuff'] += 1
+    elif "Prideful" in extrainfo:
+        house['Slytherin'] += 1
+
     ##elif "Driven" in extrainfo:
     ##    gryffindor += 1
     ##elif "Independant" in extrainfo:
@@ -44,8 +64,8 @@ def process_inputs():
 
     return render_template("main_page.html",
                            intro="You're a wizard %s." % name,
-                           body="It looks like you're a %s." % house,
-                           outro="Your letter has been sent to Hogwarts")
+                           body="You are a likely a %s." % max(house, key=house.get),
+                           outro="The following has been sent to the Sorting Hat for further review:\n %s" % letter)
 
 #Login Page Pseudo-Code
 #POST Username, Password if login is present
